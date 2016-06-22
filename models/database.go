@@ -11,9 +11,9 @@ var once sync.Once
 
 func getDB() *gorm.DB {
 	once.Do(func() {
-		dbInstance, err := gorm.Open("sqlite3", "test.db")
+		dbInstance, err := gorm.Open("sqlite3", "potholder.sqlite3")
 		if err != nil {
-			panic("Failed to connect database/")
+			panic("Failed to connect database")
 		}
 		db = dbInstance
 	})

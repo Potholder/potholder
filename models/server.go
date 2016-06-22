@@ -7,12 +7,15 @@ import (
 )
 
 /*
-Server is xcjsjcghj
+Server is structure to store server data
 */
 type Server struct {
 	gorm.Model
-	IP   string
-	Name string
+	IP          string
+	Name        string
+	SSHUser     string
+	SSHPassword string
+	SSHPort     int64
 }
 
 /*
@@ -23,10 +26,16 @@ func MigrateDB() {
 }
 
 /*
-Create is for creation of new records for server
+WriteServerToDB is for creation of new records for server
 */
-func Create(IP string, Name string) {
-	getDB().Create(&Server{IP: IP, Name: Name})
+func WriteServerToDB(server Server) {
+	getDB().Create(&server)
+}
+
+func GetAllServers() []Server {
+	var servers []Server
+	getDB().Find(&servers)
+	return servers
 }
 
 /*
